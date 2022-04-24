@@ -80,12 +80,15 @@ const start = () => __awaiter(void 0, void 0, void 0, function* () {
     yield git.addConfig("user.email", options.localEmail, undefined, "local");
     log_1.Logger.debug(`git: Changed local email to ${options.localEmail}`);
     const branches = yield git.branch();
-    const checkoutOptions = {};
-    if (!branches.all.includes(options.branch)) {
-        checkoutOptions["-b"] = null;
-    }
     // git checkout <branch> || git checkout -b <branch>
-    yield git.checkout(options.branch, checkoutOptions);
+    if (branches.all.includes(options.branch)) {
+        yield git.checkout(options.branch);
+    }
+    else {
+        yield git.checkout({
+            "-b": options.branch,
+        });
+    }
     log_1.Logger.info(`git: Checked out ${options.branch}`);
     try {
         for (var _b = __asyncValues((0, readdirp_1.default)(resolvedDirectory, {

@@ -54,13 +54,14 @@ const start = async () => {
     Logger.debug(`git: Changed local email to ${options.localEmail}`);
 
     const branches = await git.branch();
-    const checkoutOptions: sgit.Options = {};
-    if (!branches.all.includes(options.branch)) {
-        checkoutOptions["-b"] = null;
-    }
-
     // git checkout <branch> || git checkout -b <branch>
-    await git.checkout(options.branch, checkoutOptions);
+    if (branches.all.includes(options.branch)) {
+        await git.checkout(options.branch);
+    } else {
+        await git.checkout({
+            "-b": options.branch,
+        });
+    }
     Logger.info(`git: Checked out ${options.branch}`);
 
     for await (const file of readdirp(resolvedDirectory, {
