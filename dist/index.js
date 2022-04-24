@@ -42,6 +42,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const os_1 = __importDefault(require("os"));
 const path_1 = __importDefault(require("path"));
 const fs_extra_1 = __importDefault(require("fs-extra"));
 const readdirp_1 = __importDefault(require("readdirp"));
@@ -54,12 +55,12 @@ const start = () => __awaiter(void 0, void 0, void 0, function* () {
     (0, options_1.printOptions)(options);
     const resolvedDirectory = path_1.default.isAbsolute(options.directory)
         ? options.directory
-        : path_1.default.resolve(process.cwd(), options.directory);
+        : path_1.default.resolve(options.workspace, options.directory);
     log_1.Logger.info(`Push Directory: ${resolvedDirectory}`);
     if (yield fs_extra_1.default.pathExists(resolvedDirectory)) {
         throw Error(`Desired push directory (${resolvedDirectory}) does not exist.`);
     }
-    const temporaryDirectory = path_1.default.join(process.cwd(), `${options.tempDirPrefix}${path_1.default.basename(resolvedDirectory)}`);
+    const temporaryDirectory = path_1.default.join(os_1.default.tmpdir(), `${Date.now()}-${path_1.default.basename(resolvedDirectory)}`);
     log_1.Logger.debug(`Temporary Directory: ${temporaryDirectory}`);
     if (yield fs_extra_1.default.pathExists(temporaryDirectory)) {
         throw Error(`Unable to create temporary directory (${temporaryDirectory}) since it already exists.`);

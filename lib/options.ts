@@ -7,10 +7,10 @@ export interface IOptions {
     branch: string;
     force: boolean;
     directory: string;
-    tempDirPrefix: string;
     commitMessage: string;
     localUsername: string;
     localEmail: string;
+    workspace: string;
 }
 
 export const parseOptions = (): IOptions => ({
@@ -19,10 +19,10 @@ export const parseOptions = (): IOptions => ({
     branch: getInput("branch"),
     force: getBooleanInput("force"),
     directory: getInput("directory"),
-    tempDirPrefix: getInput("temp-dir-prefix"),
     commitMessage: getInput("commit-message"),
     localUsername: getInput("local-username"),
     localEmail: getInput("local-email"),
+    workspace: process.env.GITHUB_WORKSPACE!,
 });
 
 export const printOptions = (options: IOptions) => {

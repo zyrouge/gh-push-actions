@@ -9,10 +9,10 @@ const parseOptions = () => ({
     branch: (0, core_1.getInput)("branch"),
     force: (0, core_1.getBooleanInput)("force"),
     directory: (0, core_1.getInput)("directory"),
-    tempDirPrefix: (0, core_1.getInput)("temp-dir-prefix"),
     commitMessage: (0, core_1.getInput)("commit-message"),
     localUsername: (0, core_1.getInput)("local-username"),
     localEmail: (0, core_1.getInput)("local-email"),
+    workspace: process.env.GITHUB_WORKSPACE,
 });
 exports.parseOptions = parseOptions;
 const printOptions = (options) => {

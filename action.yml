@@ -22,10 +22,6 @@ inputs:
         description: Directory to be pushed
         required: true
         default: "."
-    temp-dir-prefix:
-        description: Directory to be pushed
-        required: true
-        default: "tmp-"
     commit-message:
         description: Commit message
         required: true

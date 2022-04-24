@@ -1,3 +1,4 @@
+import os from "os";
 import path from "path";
 import fs from "fs-extra";
 import readdirp from "readdirp";
@@ -11,7 +12,7 @@ const start = async () => {
 
     const resolvedDirectory = path.isAbsolute(options.directory)
         ? options.directory
-        : path.resolve(process.cwd(), options.directory);
+        : path.resolve(options.workspace, options.directory);
     Logger.info(`Push Directory: ${resolvedDirectory}`);
 
     if (await fs.pathExists(resolvedDirectory)) {
@@ -21,8 +22,8 @@ const start = async () => {
     }
 
     const temporaryDirectory = path.join(
-        process.cwd(),
-        `${options.tempDirPrefix}${path.basename(resolvedDirectory)}`
+        os.tmpdir(),
+        `${Date.now()}-${path.basename(resolvedDirectory)}`
     );
     Logger.debug(`Temporary Directory: ${temporaryDirectory}`);
 
