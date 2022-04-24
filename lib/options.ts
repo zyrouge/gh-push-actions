@@ -1,4 +1,4 @@
-import core from "@actions/core";
+import { getInput, getBooleanInput } from "@actions/core";
 import { Logger } from "./log";
 
 export interface IOptions {
@@ -14,15 +14,15 @@ export interface IOptions {
 }
 
 export const parseOptions = (): IOptions => ({
-    githubToken: core.getInput("github-token"),
-    repository: core.getInput("repository"),
-    branch: core.getInput("branch"),
-    force: core.getBooleanInput("force"),
-    directory: core.getInput("directory"),
-    tempDirPrefix: core.getInput("temp-dir-prefix"),
-    commitMessage: core.getInput("commit-message"),
-    localUsername: core.getInput("local-username"),
-    localEmail: core.getInput("local-email"),
+    githubToken: getInput("github-token"),
+    repository: getInput("repository"),
+    branch: getInput("branch"),
+    force: getBooleanInput("force"),
+    directory: getInput("directory"),
+    tempDirPrefix: getInput("temp-dir-prefix"),
+    commitMessage: getInput("commit-message"),
+    localUsername: getInput("local-username"),
+    localEmail: getInput("local-email"),
 });
 
 export const printOptions = (options: IOptions) => {
