@@ -1,0 +1,21 @@
+name: Test
+
+on:
+    push:
+        paths:
+            - dist
+        branches:
+            - main
+
+jobs:
+    test:
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v3
+
+            - name: 🧪 Test Action
+              uses: zyrouge/gh-push-action@main
+              with:
+                  directory: test-data
+                  branch: test

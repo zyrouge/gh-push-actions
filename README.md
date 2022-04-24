@@ -1,23 +1,18 @@
-# Hello world JavaScript action
+# GH Push Actions
 
-This action prints "Hello World" or "Hello" + the name of a person to greet to the log. To learn how this action was built, see "[Creating a JavaScript action](https://help.github.com/en/articles/creating-a-javascript-action)" in the GitHub Help documentation.
+🚀 Easy to use GitHub Push Action!
 
-## Inputs
+## Options
 
-### `who-to-greet`
+| Option           | Description         | Default               |
+| ---------------- | ------------------- | --------------------- |
+| `github-token`\* | GitHub or PAT Token | `${{ github.token }}` |
 
-**Required** The name of the person to greet. Default `"World"`.
+`*` - Required
 
-## Outputs
-
-### `time`
-
-The time we greeted you.
-
-## Example usage
+## Usage
 
 ```yaml
-uses: actions/hello-world-javascript-action@main
+uses: zyrouge/gh-push-action@main
 with:
-  who-to-greet: 'Mona the Octocat'
 ```

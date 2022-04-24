@@ -1,13 +1,44 @@
-name: 'Hello World'
-description: 'Greet someone and record the time'
+name: "GH Push Action"
+description: "🚀 Easy to use GitHub Push Action!"
+
 inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet'
-    required: true
-    default: 'World'
-outputs:
-  time: # id of output
-    description: 'The time we greeted you'
+    github-token:
+        description: GitHub token or PAT token
+        required: true
+        default: ${{ github.token }}
+    repository:
+        description: GitHub Repository (username/repo)
+        required: true
+        default: ${{ github.repository }}
+    branch:
+        description: Repository Branch
+        required: true
+        default: ${{ github.ref_name }}
+    force:
+        description: Determines if force push is used
+        required: true
+        default: false
+    directory:
+        description: Directory to be pushed
+        required: true
+        default: "."
+    temp-dir-prefix:
+        description: Directory to be pushed
+        required: true
+        default: "tmp-"
+    commit-message:
+        description: Commit message
+        required: true
+        default: "[actions] Pushed from ${{ github.sha }}"
+    local-username:
+        description: Git Local Username
+        required: true
+        default: github-actions
+    local-email:
+        description: Git Local Username
+        required: true
+        default: "${{ github.actor }}@users.noreply.github.com"
+
 runs:
-  using: 'node16'
-  main: 'index.js'
+    using: node16
+    main: "dist/index.js"
