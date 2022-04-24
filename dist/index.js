@@ -57,7 +57,7 @@ const start = () => __awaiter(void 0, void 0, void 0, function* () {
         ? options.directory
         : path_1.default.resolve(options.workspace, options.directory);
     log_1.Logger.info(`Push Directory: ${resolvedDirectory}`);
-    if (yield fs_extra_1.default.pathExists(resolvedDirectory)) {
+    if (!(yield fs_extra_1.default.pathExists(resolvedDirectory))) {
         throw Error(`Desired push directory (${resolvedDirectory}) does not exist.`);
     }
     const temporaryDirectory = path_1.default.join(os_1.default.tmpdir(), `${Date.now()}-${path_1.default.basename(resolvedDirectory)}`);

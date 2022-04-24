@@ -15,7 +15,7 @@ const start = async () => {
         : path.resolve(options.workspace, options.directory);
     Logger.info(`Push Directory: ${resolvedDirectory}`);
 
-    if (await fs.pathExists(resolvedDirectory)) {
+    if (!(await fs.pathExists(resolvedDirectory))) {
         throw Error(
             `Desired push directory (${resolvedDirectory}) does not exist.`
         );
