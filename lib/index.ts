@@ -37,7 +37,7 @@ const start = async () => {
         recursive: true,
     });
 
-    const ghRepoUrl = `https://x-access-token:${options.githubToken}@github.com/${options.repository}}`;
+    const ghRepoUrl = `https://x-access-token:${options.githubToken}@github.com/${options.repository}`;
 
     const git = sgit.default(temporaryDirectory);
 

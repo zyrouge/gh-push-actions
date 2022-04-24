@@ -68,7 +68,7 @@ const start = () => __awaiter(void 0, void 0, void 0, function* () {
     yield fs_extra_1.default.mkdir(temporaryDirectory, {
         recursive: true,
     });
-    const ghRepoUrl = `https://x-access-token:${options.githubToken}@github.com/${options.repository}}`;
+    const ghRepoUrl = `https://x-access-token:${options.githubToken}@github.com/${options.repository}`;
     const git = sgit.default(temporaryDirectory);
     // git clone <url> <path>
     yield git.clone(ghRepoUrl, temporaryDirectory);
