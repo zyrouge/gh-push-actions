@@ -58,12 +58,12 @@ const start = () => __awaiter(void 0, void 0, void 0, function* () {
     const resolvedDirectory = path_1.default.isAbsolute(options.directory)
         ? options.directory
         : path_1.default.resolve(options.workspace, options.directory);
-    log_1.Logger.info(`Push Directory: ${resolvedDirectory}`);
+    log_1.Logger.info("options", `Push Directory: ${resolvedDirectory}`);
     if (!(yield fs_extra_1.default.pathExists(resolvedDirectory))) {
         throw Error(`Desired push directory (${resolvedDirectory}) does not exist.`);
     }
     const temporaryDirectory = path_1.default.join(os_1.default.tmpdir(), `${Date.now()}-${path_1.default.basename(resolvedDirectory)}`);
-    log_1.Logger.debug(`Temporary Directory: ${temporaryDirectory}`);
+    log_1.Logger.debug("options", `Temporary Directory: ${temporaryDirectory}`);
     if (yield fs_extra_1.default.pathExists(temporaryDirectory)) {
         throw Error(`Unable to create temporary directory (${temporaryDirectory}) since it already exists.`);
     }
@@ -73,25 +73,25 @@ const start = () => __awaiter(void 0, void 0, void 0, function* () {
     const ghRepoUrl = `https://x-access-token:${options.githubToken}@github.com/${options.repository}`;
     const git = sgit.default(temporaryDirectory);
     // git clone <url> <path>
-    log_1.Logger.verb(`git: stdout: ${yield git.clone(ghRepoUrl, ".")}`);
-    log_1.Logger.info(`git: Cloned to ${temporaryDirectory}`);
+    log_1.Logger.verb("git: stdout", yield git.clone(ghRepoUrl, "."));
+    log_1.Logger.info("git", `Cloned to ${temporaryDirectory}`);
     // git config --local user.name <username>
-    log_1.Logger.verb(`git: stdout: ${yield git.addConfig("user.name", options.localUsername, undefined, "local")}`);
-    log_1.Logger.debug(`git: Changed local username to ${options.localUsername}`);
+    log_1.Logger.verb("git: stdout", yield git.addConfig("user.name", options.localUsername, undefined, "local"));
+    log_1.Logger.debug("git", `Changed local username to ${options.localUsername}`);
     // git config --local user.email <email>
-    log_1.Logger.verb(`git: stdout: ${yield git.addConfig("user.email", options.localEmail, undefined, "local")}`);
-    log_1.Logger.debug(`git: Changed local email to ${options.localEmail}`);
+    log_1.Logger.verb("git: stdout", yield git.addConfig("user.email", options.localEmail, undefined, "local"));
+    log_1.Logger.debug("git", `Changed local email to ${options.localEmail}`);
     const branches = yield git.branch();
     // git checkout <branch> || git checkout -b <branch>
     if (branches.all.includes(options.branch)) {
-        log_1.Logger.verb(`git: stdout: ${yield git.checkout(options.branch)}`);
+        log_1.Logger.verb("git: stdout", yield git.checkout(options.branch));
     }
     else {
-        log_1.Logger.verb(`git: stdout: ${yield git.checkout({
+        log_1.Logger.verb("git: stdout", yield git.checkout({
             "-b": options.branch,
-        })}`);
+        }));
     }
-    log_1.Logger.info(`git: Checked out ${options.branch}`);
+    log_1.Logger.info("git", `Checked out ${options.branch}`);
     try {
         for (var _c = __asyncValues((0, readdirp_1.default)(resolvedDirectory, {
             type: "files",
@@ -101,7 +101,7 @@ const start = () => __awaiter(void 0, void 0, void 0, function* () {
             const relativePath = path_1.default.relative(resolvedDirectory, file.fullPath);
             const copyPath = path_1.default.join(temporaryDirectory, relativePath);
             yield fs_extra_1.default.copyFile(file.fullPath, copyPath);
-            log_1.Logger.debug(`copy: Copied ${file.fullPath} -> ${copyPath}`);
+            log_1.Logger.debug("copy", `Copied ${file.fullPath} -> ${copyPath}`);
         }
     }
     catch (e_1_1) { e_1 = { error: e_1_1 }; }
@@ -112,24 +112,24 @@ const start = () => __awaiter(void 0, void 0, void 0, function* () {
         finally { if (e_1) throw e_1.error; }
     }
     // git add .
-    log_1.Logger.verb(`git: stdout: ${yield git.add(".")}`);
-    log_1.Logger.info("git: Added files");
+    log_1.Logger.verb("git: stdout", yield git.add("."));
+    log_1.Logger.info("git", "Added files");
     // git commit -m "${{ steps.commit-msg.outputs.result }}"
     const commitResult = yield git.commit(options.commitMessage);
-    log_1.Logger.verb(`git: stdout: author=${commitResult.author} | branch=${commitResult.branch} | commit=${commitResult.commit} | additions=${commitResult.summary.insertions} | deletions=${commitResult.summary.deletions} | changes=${commitResult.summary.changes}`);
-    log_1.Logger.info(`git: Commit with message: ${options.commitMessage}`);
+    log_1.Logger.verb("git: stdout", `author=${commitResult.author} | branch=${commitResult.branch} | commit=${commitResult.commit} | additions=${commitResult.summary.insertions} | deletions=${commitResult.summary.deletions} | changes=${commitResult.summary.changes}`);
+    log_1.Logger.info("git", `Commit with message: ${options.commitMessage}`);
     const pushOptions = {};
     if (options.force) {
         pushOptions["--force"] = null;
     }
     // git push origin <branch> [--force]
     const pushResult = yield git.push("origin", options.branch, pushOptions);
-    log_1.Logger.verb(`git: stdout: repo=${pushResult.repo} | remoteName=${(_b = pushResult.branch) === null || _b === void 0 ? void 0 : _b.remoteName}`);
-    log_1.Logger.info(`git: Push files to ${options.branch}`);
+    log_1.Logger.verb("git: stdout", `repo=${pushResult.repo} | remoteName=${(_b = pushResult.branch) === null || _b === void 0 ? void 0 : _b.remoteName}`);
+    log_1.Logger.info("git", `Push files to ${options.branch}`);
 });
 start().catch((err) => {
-    log_1.Logger.error("Something went wrong!");
-    log_1.Logger.error(err);
-    log_1.Logger.error(err.stack);
+    log_1.Logger.error("main", "Something went wrong!");
+    log_1.Logger.error("main", err);
+    log_1.Logger.error("main", err.stack);
     process.exit(err.code || -1);
 });

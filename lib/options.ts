@@ -30,11 +30,11 @@ export const parseOptions = (): IOptions => ({
 export const printOptions = (options: IOptions) => {
     const ignoredKeys: (keyof IOptions)[] = ["githubToken"];
 
-    Logger.info("Options:");
+    Logger.info("options", "Input Options:");
     (Object.keys(options) as (keyof IOptions)[]).forEach((x) => {
         if (!ignoredKeys.includes(x)) {
-            Logger.info(`   ${x}: ${options[x]}`);
+            Logger.info("options", `   ${x}: ${options[x]}`);
         }
     });
-    Logger.info(" ");
+    Logger.ln();
 };

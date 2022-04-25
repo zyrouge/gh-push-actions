@@ -1,29 +1,34 @@
 export class Logger {
     static isVerbose = false;
 
-    static debug(text: string) {
-        console.log(Logger.__getPrefixed("debug", text));
+    static debug(prefix: string, text: string) {
+        console.log(Logger.__getPrefixed(`debug: ${prefix}`, text));
     }
 
-    static warn(text: string) {
-        console.warn(Logger.__getPrefixed("warn", text));
+    static warn(prefix: string, text: string) {
+        console.warn(Logger.__getPrefixed(`warn: ${prefix}`, text));
     }
 
-    static info(text: string) {
-        console.log(Logger.__getPrefixed("info", text));
+    static info(prefix: string, text: string) {
+        console.log(Logger.__getPrefixed(`info: ${prefix}`, text));
     }
 
-    static error(text: any) {
-        console.error(Logger.__getPrefixed("error", text));
+    static error(prefix: string, text: any) {
+        console.error(Logger.__getPrefixed(`error: ${prefix}`, text));
     }
 
-    static verb(text: string) {
+    static verb(prefix: string, text: string) {
         if (Logger.isVerbose) {
-            console.log(Logger.__getPrefixed("verbose", text));
+            console.log(Logger.__getPrefixed(`verbose: ${prefix}`, text));
         }
     }
 
+    static ln() {
+        console.log(" ");
+    }
+
     static __getPrefixed(prefix: string, text: string, seperator = "\n") {
+        console.log(`kek: ${text}`);
         return text
             .split(seperator)
             .map((x) => `${prefix}: ${x}`)
