@@ -1,5 +1,5 @@
 import { getInput, getBooleanInput } from "@actions/core";
-import { Logger } from "./log";
+import { logger } from "./log";
 
 export interface IOptions {
     githubToken: string;
@@ -30,11 +30,11 @@ export const parseOptions = (): IOptions => ({
 export const printOptions = (options: IOptions) => {
     const ignoredKeys: (keyof IOptions)[] = ["githubToken"];
 
-    Logger.info("options", "Input Options:");
+    logger.info("options", "Input Options:");
     (Object.keys(options) as (keyof IOptions)[]).forEach((x) => {
         if (!ignoredKeys.includes(x)) {
-            Logger.info("options", `   ${x}: ${options[x]}`);
+            logger.info("options", `   ${x}: ${options[x]}`);
         }
     });
-    Logger.ln();
+    logger.ln();
 };

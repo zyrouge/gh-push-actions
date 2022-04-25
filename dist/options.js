@@ -18,12 +18,12 @@ const parseOptions = () => ({
 exports.parseOptions = parseOptions;
 const printOptions = (options) => {
     const ignoredKeys = ["githubToken"];
-    log_1.Logger.info("options", "Input Options:");
+    log_1.logger.info("options", "Input Options:");
     Object.keys(options).forEach((x) => {
         if (!ignoredKeys.includes(x)) {
-            log_1.Logger.info("options", `   ${x}: ${options[x]}`);
+            log_1.logger.info("options", `   ${x}: ${options[x]}`);
         }
     });
-    log_1.Logger.ln();
+    log_1.logger.ln();
 };
 exports.printOptions = printOptions;
