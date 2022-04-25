@@ -107,7 +107,7 @@ const start = () => __awaiter(void 0, void 0, void 0, function* () {
 });
 start().catch((err) => {
     log_1.logger.error("main", "Something went wrong!");
-    log_1.logger.error("main", err);
-    log_1.logger.error("main", err.stack);
+    console.error(err);
+    console.error(err.stack);
     process.exit(err.code || -1);
 });

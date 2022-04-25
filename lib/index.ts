@@ -110,7 +110,7 @@ const start = async () => {
 
 start().catch((err) => {
     logger.error("main", "Something went wrong!");
-    logger.error("main", err);
-    logger.error("main", err.stack);
+    console.error(err);
+    console.error(err.stack);
     process.exit(err.code || -1);
 });
