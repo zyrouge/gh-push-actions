@@ -21,3 +21,4 @@ jobs:
                   directory: test-data
                   branch: test
                   verbose: true
+                  allow-empty-commit: true

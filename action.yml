@@ -7,7 +7,7 @@ inputs:
         required: true
         default: ${{ github.token }}
     repository:
-        description: GitHub Repository (username/repo)
+        description: "GitHub Repository (format: `username/repo`)"
         required: true
         default: ${{ github.repository }}
     branch:
@@ -31,7 +31,7 @@ inputs:
         required: true
         default: github-actions
     local-email:
-        description: Git Local Username
+        description: Git Local Email
         required: true
         default: "${{ github.actor }}@users.noreply.github.com"
     verbose:
