@@ -12,6 +12,7 @@ export interface IOptions {
     localEmail: string;
     workspace: string;
     verbose: boolean;
+    allowEmptyCommit: boolean;
 }
 
 export const parseOptions = (): IOptions => ({
@@ -25,6 +26,7 @@ export const parseOptions = (): IOptions => ({
     localEmail: getInput("local-email"),
     workspace: process.env.GITHUB_WORKSPACE!,
     verbose: getBooleanInput("verbose"),
+    allowEmptyCommit: getBooleanInput("allow-empty-commit"),
 });
 
 export const printOptions = (options: IOptions) => {

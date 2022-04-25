@@ -94,8 +94,13 @@ const start = async () => {
     git.print("add", await git.run(["add", "."]));
     logger.info("git", "Added files");
 
-    // git commit -m "${{ steps.commit-msg.outputs.result }}"
-    git.print("commit", await git.run(["commit", "-m", options.commitMessage]));
+    const commitArgs: string[] = ["commit", "-m", options.commitMessage];
+    if (options.allowEmptyCommit) {
+        commitArgs.push("--allow-empty");
+    }
+
+    // git commit -m <message> [--allow-empty]
+    git.print("commit", await git.run(commitArgs));
     logger.info("git", `Commit with message: ${options.commitMessage}`);
 
     const pushArgs: string[] = ["push", "-u", "origin", options.branch];

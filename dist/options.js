@@ -14,6 +14,7 @@ const parseOptions = () => ({
     localEmail: (0, core_1.getInput)("local-email"),
     workspace: process.env.GITHUB_WORKSPACE,
     verbose: (0, core_1.getBooleanInput)("verbose"),
+    allowEmptyCommit: (0, core_1.getBooleanInput)("allow-empty-commit"),
 });
 exports.parseOptions = parseOptions;
 const printOptions = (options) => {

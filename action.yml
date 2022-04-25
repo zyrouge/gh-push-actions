@@ -38,6 +38,10 @@ inputs:
         description: Verbose logging
         required: true
         default: false
+    allow-empty-commit:
+        description: Determines if empty commits are allowed
+        required: true
+        default: false
 
 runs:
     using: node16

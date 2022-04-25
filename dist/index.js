@@ -94,8 +94,12 @@ const start = () => __awaiter(void 0, void 0, void 0, function* () {
     // git add .
     git.print("add", yield git.run(["add", "."]));
     log_1.logger.info("git", "Added files");
-    // git commit -m "${{ steps.commit-msg.outputs.result }}"
-    git.print("commit", yield git.run(["commit", "-m", options.commitMessage]));
+    const commitArgs = ["commit", "-m", options.commitMessage];
+    if (options.allowEmptyCommit) {
+        commitArgs.push("--allow-empty");
+    }
+    // git commit -m <message> [--allow-empty]
+    git.print("commit", yield git.run(commitArgs));
     log_1.logger.info("git", `Commit with message: ${options.commitMessage}`);
     const pushArgs = ["push", "-u", "origin", options.branch];
     if (options.force) {
