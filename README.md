@@ -20,7 +20,7 @@
 ## Usage
 
 ```yaml
-uses: zyrouge/gh-push-action@v1.0.0
+uses: zyrouge/gh-push-action@v1.0.1
 with:
     directory: dist
     branch: gh-pages
