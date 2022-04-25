@@ -34,6 +34,10 @@ inputs:
         description: Git Local Username
         required: true
         default: "${{ github.actor }}@users.noreply.github.com"
+    verbose:
+        description: Verbose logging
+        required: true
+        default: false
 
 runs:
     using: node16

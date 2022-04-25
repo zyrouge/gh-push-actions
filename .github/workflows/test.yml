@@ -20,3 +20,4 @@ jobs:
               with:
                   directory: test-data
                   branch: test
+                  verbose: true

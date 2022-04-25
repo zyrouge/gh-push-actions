@@ -11,6 +11,7 @@ export interface IOptions {
     localUsername: string;
     localEmail: string;
     workspace: string;
+    verbose: boolean;
 }
 
 export const parseOptions = (): IOptions => ({
@@ -23,6 +24,7 @@ export const parseOptions = (): IOptions => ({
     localUsername: getInput("local-username"),
     localEmail: getInput("local-email"),
     workspace: process.env.GITHUB_WORKSPACE!,
+    verbose: getBooleanInput("verbose"),
 });
 
 export const printOptions = (options: IOptions) => {

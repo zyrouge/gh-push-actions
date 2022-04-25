@@ -13,6 +13,7 @@ const parseOptions = () => ({
     localUsername: (0, core_1.getInput)("local-username"),
     localEmail: (0, core_1.getInput)("local-email"),
     workspace: process.env.GITHUB_WORKSPACE,
+    verbose: (0, core_1.getBooleanInput)("verbose"),
 });
 exports.parseOptions = parseOptions;
 const printOptions = (options) => {
