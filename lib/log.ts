@@ -28,8 +28,8 @@ export class Logger {
     }
 
     static __getPrefixed(prefix: string, text: string, seperator = "\n") {
-        console.log(`kek: ${text}`);
         return text
+            .toString() // Just in case
             .split(seperator)
             .map((x) => `${prefix}: ${x}`)
             .join(seperator);

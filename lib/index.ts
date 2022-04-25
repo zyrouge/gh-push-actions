@@ -43,12 +43,12 @@ const start = async () => {
     const git = sgit.default(temporaryDirectory);
 
     // git clone <url> <path>
-    Logger.verb("git: stdout", await git.clone(ghRepoUrl, "."));
+    Logger.verb("git: stdout: clone", await git.clone(ghRepoUrl, "."));
     Logger.info("git", `Cloned to ${temporaryDirectory}`);
 
     // git config --local user.name <username>
     Logger.verb(
-        "git: stdout",
+        "git: stdout: config: user.name",
         await git.addConfig(
             "user.name",
             options.localUsername,
@@ -60,7 +60,7 @@ const start = async () => {
 
     // git config --local user.email <email>
     Logger.verb(
-        "git: stdout",
+        "git: stdout: config: user.email",
         await git.addConfig(
             "user.email",
             options.localEmail,
@@ -73,10 +73,13 @@ const start = async () => {
     const branches = await git.branch();
     // git checkout <branch> || git checkout -b <branch>
     if (branches.all.includes(options.branch)) {
-        Logger.verb("git: stdout", await git.checkout(options.branch));
+        Logger.verb(
+            "git: stdout: checkout",
+            await git.checkout(options.branch)
+        );
     } else {
         Logger.verb(
-            "git: stdout",
+            "git: stdout: checkout -b",
             await git.checkout({
                 "-b": options.branch,
             })
@@ -96,26 +99,30 @@ const start = async () => {
     }
 
     // git add .
-    Logger.verb("git: stdout", await git.add("."));
+    Logger.verb("git: stdout: add", await git.add("."));
     Logger.info("git", "Added files");
 
     // git commit -m "${{ steps.commit-msg.outputs.result }}"
     const commitResult = await git.commit(options.commitMessage);
     Logger.verb(
-        "git: stdout",
+        "git: stdout: commit",
         `author=${commitResult.author} | branch=${commitResult.branch} | commit=${commitResult.commit} | additions=${commitResult.summary.insertions} | deletions=${commitResult.summary.deletions} | changes=${commitResult.summary.changes}`
     );
     Logger.info("git", `Commit with message: ${options.commitMessage}`);
 
-    const pushOptions: sgit.Options = {};
+    const pushOptions: sgit.Options = {
+        "-u": null,
+    };
     if (options.force) {
         pushOptions["--force"] = null;
     }
 
+    console.log(await git.status());
+
     // git push origin <branch> [--force]
     const pushResult = await git.push("origin", options.branch, pushOptions);
     Logger.verb(
-        "git: stdout",
+        "git: stdout: push",
         `repo=${pushResult.repo} | remoteName=${pushResult.branch?.remoteName}`
     );
     Logger.info("git", `Push files to ${options.branch}`);

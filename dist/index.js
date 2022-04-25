@@ -73,21 +73,21 @@ const start = () => __awaiter(void 0, void 0, void 0, function* () {
     const ghRepoUrl = `https://x-access-token:${options.githubToken}@github.com/${options.repository}`;
     const git = sgit.default(temporaryDirectory);
     // git clone <url> <path>
-    log_1.Logger.verb("git: stdout", yield git.clone(ghRepoUrl, "."));
+    log_1.Logger.verb("git: stdout: clone", yield git.clone(ghRepoUrl, "."));
     log_1.Logger.info("git", `Cloned to ${temporaryDirectory}`);
     // git config --local user.name <username>
-    log_1.Logger.verb("git: stdout", yield git.addConfig("user.name", options.localUsername, undefined, "local"));
+    log_1.Logger.verb("git: stdout: config: user.name", yield git.addConfig("user.name", options.localUsername, undefined, "local"));
     log_1.Logger.debug("git", `Changed local username to ${options.localUsername}`);
     // git config --local user.email <email>
-    log_1.Logger.verb("git: stdout", yield git.addConfig("user.email", options.localEmail, undefined, "local"));
+    log_1.Logger.verb("git: stdout: config: user.email", yield git.addConfig("user.email", options.localEmail, undefined, "local"));
     log_1.Logger.debug("git", `Changed local email to ${options.localEmail}`);
     const branches = yield git.branch();
     // git checkout <branch> || git checkout -b <branch>
     if (branches.all.includes(options.branch)) {
-        log_1.Logger.verb("git: stdout", yield git.checkout(options.branch));
+        log_1.Logger.verb("git: stdout: checkout", yield git.checkout(options.branch));
     }
     else {
-        log_1.Logger.verb("git: stdout", yield git.checkout({
+        log_1.Logger.verb("git: stdout: checkout -b", yield git.checkout({
             "-b": options.branch,
         }));
     }
@@ -112,19 +112,22 @@ const start = () => __awaiter(void 0, void 0, void 0, function* () {
         finally { if (e_1) throw e_1.error; }
     }
     // git add .
-    log_1.Logger.verb("git: stdout", yield git.add("."));
+    log_1.Logger.verb("git: stdout: add", yield git.add("."));
     log_1.Logger.info("git", "Added files");
     // git commit -m "${{ steps.commit-msg.outputs.result }}"
     const commitResult = yield git.commit(options.commitMessage);
-    log_1.Logger.verb("git: stdout", `author=${commitResult.author} | branch=${commitResult.branch} | commit=${commitResult.commit} | additions=${commitResult.summary.insertions} | deletions=${commitResult.summary.deletions} | changes=${commitResult.summary.changes}`);
+    log_1.Logger.verb("git: stdout: commit", `author=${commitResult.author} | branch=${commitResult.branch} | commit=${commitResult.commit} | additions=${commitResult.summary.insertions} | deletions=${commitResult.summary.deletions} | changes=${commitResult.summary.changes}`);
     log_1.Logger.info("git", `Commit with message: ${options.commitMessage}`);
-    const pushOptions = {};
+    const pushOptions = {
+        "-u": null,
+    };
     if (options.force) {
         pushOptions["--force"] = null;
     }
+    console.log(yield git.status());
     // git push origin <branch> [--force]
     const pushResult = yield git.push("origin", options.branch, pushOptions);
-    log_1.Logger.verb("git: stdout", `repo=${pushResult.repo} | remoteName=${(_b = pushResult.branch) === null || _b === void 0 ? void 0 : _b.remoteName}`);
+    log_1.Logger.verb("git: stdout: push", `repo=${pushResult.repo} | remoteName=${(_b = pushResult.branch) === null || _b === void 0 ? void 0 : _b.remoteName}`);
     log_1.Logger.info("git", `Push files to ${options.branch}`);
 });
 start().catch((err) => {
