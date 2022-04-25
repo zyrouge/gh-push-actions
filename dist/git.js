@@ -22,6 +22,7 @@ class Git {
     run(args) {
         return __awaiter(this, void 0, void 0, function* () {
             return new Promise((resolve, reject) => {
+                var _a, _b;
                 const child = (0, cross_spawn_1.default)("git", args, {
                     cwd: this.options.directory,
                     stdio: "pipe",
@@ -33,10 +34,10 @@ class Git {
                     stderr: "",
                     exitCode: null,
                 };
-                child.on("message", (msg) => {
+                (_a = child.stdout) === null || _a === void 0 ? void 0 : _a.addListener("data", (msg) => {
                     result.stdout += msg.toString();
                 });
-                child.on("error", (msg) => {
+                (_b = child.stderr) === null || _b === void 0 ? void 0 : _b.addListener("data", (msg) => {
                     result.stderr += msg.toString();
                 });
                 child.on("close", (exitCode) => {

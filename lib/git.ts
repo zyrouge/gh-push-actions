@@ -31,11 +31,11 @@ export class Git {
                 exitCode: null,
             };
 
-            child.on("message", (msg) => {
+            child.stdout?.addListener("data", (msg) => {
                 result.stdout += msg.toString();
             });
 
-            child.on("error", (msg) => {
+            child.stderr?.addListener("data", (msg) => {
                 result.stderr += msg.toString();
             });
 
