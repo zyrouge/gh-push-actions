@@ -43,9 +43,7 @@ const start = async () => {
     const git = sgit.default(temporaryDirectory);
 
     // git clone <url> <path>
-    Logger.verb(
-        `git: stdout: ${await git.clone(ghRepoUrl, temporaryDirectory)}`
-    );
+    Logger.verb(`git: stdout: ${await git.clone(ghRepoUrl, ".")}`);
     Logger.info(`git: Cloned to ${temporaryDirectory}`);
 
     // git config --local user.name <username>

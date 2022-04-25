@@ -73,7 +73,7 @@ const start = () => __awaiter(void 0, void 0, void 0, function* () {
     const ghRepoUrl = `https://x-access-token:${options.githubToken}@github.com/${options.repository}`;
     const git = sgit.default(temporaryDirectory);
     // git clone <url> <path>
-    log_1.Logger.verb(`git: stdout: ${yield git.clone(ghRepoUrl, temporaryDirectory)}`);
+    log_1.Logger.verb(`git: stdout: ${yield git.clone(ghRepoUrl, ".")}`);
     log_1.Logger.info(`git: Cloned to ${temporaryDirectory}`);
     // git config --local user.name <username>
     log_1.Logger.verb(`git: stdout: ${yield git.addConfig("user.name", options.localUsername, undefined, "local")}`);
