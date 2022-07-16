@@ -44,10 +44,6 @@ export const action = async (options: IOptions) => {
         directory: temporaryDirectory,
     });
 
-    // git clone <url> <path>
-    git.print("clone", await git.run(["clone", ghRepoUrl, "."]));
-    logger.info("git", `Cloned to ${temporaryDirectory}`);
-
     // git config --local user.name <username>
     git.print(
         "config: user.name",
@@ -61,6 +57,21 @@ export const action = async (options: IOptions) => {
         await git.run(["config", "--local", "user.email", options.localEmail])
     );
     logger.debug("git", `Changed local email to ${options.localEmail}`);
+
+    // git init
+    git.print("init", await git.run(["init"]));
+    logger.info("git", `Initialized repository at ${temporaryDirectory}`);
+
+    // git remote add origin <url>
+    git.print(
+        "add-remote",
+        await git.run(["remote", "add", "origin", ghRepoUrl])
+    );
+    logger.info("git", `Added remote "origin" -> ${ghRepoUrl}`);
+
+    // git fetch
+    git.print("fetch", await git.run(["fetch"]));
+    logger.info("git", "Fetch repository");
 
     // git show-branch remotes/origin/<remote-branch-name>
     const checkBranch = await git

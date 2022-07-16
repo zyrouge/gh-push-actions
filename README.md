@@ -20,8 +20,12 @@
 ## Usage
 
 ```yaml
-uses: zyrouge/gh-push-action@v1.0.1
-with:
-    directory: dist
-    branch: gh-pages
+- uses: zyrouge/gh-push-action@v1.0.2
+  with:
+      directory: dist
+      branch: gh-pages
 ```
+
+## Example
+
+Check out [test.yml](./.github/workflows/test.yml).
