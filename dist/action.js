@@ -50,15 +50,15 @@ const action = (options) => __awaiter(void 0, void 0, void 0, function* () {
     const git = new git_1.Git({
         directory: temporaryDirectory,
     });
+    // git init
+    git.print("init", yield git.run(["init"]));
+    log_1.logger.info("git", `Initialized repository at ${temporaryDirectory}`);
     // git config --local user.name <username>
     git.print("config: user.name", yield git.run(["config", "--local", "user.name", options.localUsername]));
     log_1.logger.debug("git", `Changed local username to ${options.localUsername}`);
     // git config --local user.email <email>
     git.print("config: user.email", yield git.run(["config", "--local", "user.email", options.localEmail]));
     log_1.logger.debug("git", `Changed local email to ${options.localEmail}`);
-    // git init
-    git.print("init", yield git.run(["init"]));
-    log_1.logger.info("git", `Initialized repository at ${temporaryDirectory}`);
     // git remote add origin <url>
     git.print("add-remote", yield git.run(["remote", "add", "origin", ghRepoUrl]));
     log_1.logger.info("git", `Added remote "origin" -> ${ghRepoUrl}`);

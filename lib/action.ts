@@ -44,6 +44,10 @@ export const action = async (options: IOptions) => {
         directory: temporaryDirectory,
     });
 
+    // git init
+    git.print("init", await git.run(["init"]));
+    logger.info("git", `Initialized repository at ${temporaryDirectory}`);
+
     // git config --local user.name <username>
     git.print(
         "config: user.name",
@@ -57,10 +61,6 @@ export const action = async (options: IOptions) => {
         await git.run(["config", "--local", "user.email", options.localEmail])
     );
     logger.debug("git", `Changed local email to ${options.localEmail}`);
-
-    // git init
-    git.print("init", await git.run(["init"]));
-    logger.info("git", `Initialized repository at ${temporaryDirectory}`);
 
     // git remote add origin <url>
     git.print(
