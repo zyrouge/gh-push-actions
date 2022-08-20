@@ -92,6 +92,8 @@ export const action = async (options: IOptions) => {
 
     for await (const file of readdirp(resolvedDirectory, {
         type: "files",
+        // Don't copy files in `.git` folder
+        fileFilter: (entry) => !entry.path.includes(".git"),
         directoryFilter: (entry) =>
             path.relative(entry.fullPath, temporaryDirectory) !== "",
     })) {
