@@ -81,6 +81,8 @@ const action = (options) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         for (var _b = __asyncValues((0, readdirp_1.default)(resolvedDirectory, {
             type: "files",
+            // Don't copy files in `.git` folder
+            fileFilter: (entry) => !entry.path.includes(".git"),
             directoryFilter: (entry) => path_1.default.relative(entry.fullPath, temporaryDirectory) !== "",
         })), _c; _c = yield _b.next(), !_c.done;) {
             const file = _c.value;
