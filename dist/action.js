@@ -86,6 +86,7 @@ const action = (options) => __awaiter(void 0, void 0, void 0, function* () {
             const file = _c.value;
             const relativePath = path_1.default.relative(resolvedDirectory, file.fullPath);
             const copyPath = path_1.default.join(temporaryDirectory, relativePath);
+            yield fs_extra_1.default.ensureDir(path_1.default.dirname(copyPath));
             yield fs_extra_1.default.copyFile(file.fullPath, copyPath);
             log_1.logger.debug("copy", `Copied ${file.fullPath} -> ${copyPath}`);
         }

@@ -97,6 +97,7 @@ export const action = async (options: IOptions) => {
     })) {
         const relativePath = path.relative(resolvedDirectory, file.fullPath);
         const copyPath = path.join(temporaryDirectory, relativePath);
+        await fs.ensureDir(path.dirname(copyPath));
         await fs.copyFile(file.fullPath, copyPath);
         logger.debug("copy", `Copied ${file.fullPath} -> ${copyPath}`);
     }
