@@ -1,4 +1,4 @@
-# GH Push Actions
+# Github Push Action
 
 🚀 Easy to use GitHub Push Action!
 
