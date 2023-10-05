@@ -1,4 +1,5 @@
-name: "GH Push Action"
+name: "Github Push Action"
+author: "Zyrouge"
 description: "🚀 Easy to use GitHub Push Action!"
 
 inputs:
