@@ -1,6 +1,10 @@
 name: "Github Push Action"
 author: "Zyrouge"
 description: "🚀 Easy to use GitHub Push Action!"
+branding:
+    icon: "git-merge"
+    color: "purple"
+
 
 inputs:
     github-token:
