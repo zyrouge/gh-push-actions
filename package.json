@@ -1,5 +1,5 @@
 {
-    "name": "@zyrouge/gh-push-action",
+    "name": "@zyrouge/github-push-action",
     "version": "1.0.7",
     "description": "🚀 Easy to use GitHub Push Action!",
     "main": "dist/index.js",
@@ -8,15 +8,15 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/zyrouge/gh-push-action.git"
+        "url": "git+https://github.com/zyrouge/github-push-action.git"
     },
     "keywords": [],
     "author": "Zyrouge",
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/zyrouge/gh-push-action/issues"
+        "url": "https://github.com/zyrouge/github-push-action/issues"
     },
-    "homepage": "https://github.com/zyrouge/gh-push-action#readme",
+    "homepage": "https://github.com/zyrouge/github-push-action#readme",
     "dependencies": {
         "@actions/core": "^1.6.0",
         "@actions/github": "^5.0.1",
