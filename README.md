@@ -2,7 +2,7 @@
 
 🚀 Easy to use GitHub Push Action!
 
-[![Latest Version](https://img.shields.io/github/v/release/zyrouge/github-push-action?logo=github&label=github-marketplace)](https://github.com/marketplace/actions/github-push)
+[![Latest Version](https://img.shields.io/github/v/release/zyrouge/github-push-action?logo=github&label=github-marketplace)](https://github.com/marketplace/actions/github-push-action)
 
 ## Usage
 
