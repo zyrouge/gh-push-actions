@@ -5,7 +5,6 @@ branding:
     icon: "git-merge"
     color: "purple"
 
-
 inputs:
     github-token:
         description: GitHub token or PAT token
@@ -30,7 +29,7 @@ inputs:
     commit-message:
         description: Commit message
         required: true
-        default: "[actions] Pushed from ${{ github.sha }}"
+        default: "[actions] pushed from ${{ github.sha }}"
     local-username:
         description: Git Local Username
         required: true
@@ -45,6 +44,10 @@ inputs:
         default: false
     allow-empty-commit:
         description: Determines if empty commits are allowed
+        required: true
+        default: false
+    skip-fetch:
+        description: Allows skipping git fetch
         required: true
         default: false
 

@@ -69,9 +69,11 @@ export const action = async (options: IOptions) => {
     );
     logger.info("git", `Added remote "origin" -> ${ghRepoUrl}`);
 
-    // git fetch
-    git.print("fetch", await git.run(["fetch"]));
-    logger.info("git", "Fetch repository");
+    if (!options.skipFetch) {
+        // git fetch
+        git.print("fetch", await git.run(["fetch"]));
+        logger.info("git", "Fetch remote repository");
+    }
 
     // git show-branch remotes/origin/<remote-branch-name>
     const checkBranch = await git

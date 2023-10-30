@@ -10,7 +10,7 @@ const start = async () => {
         logger.error("main", "Something went wrong!");
         console.error(err);
         console.error(err.stack);
-        process.exit(err.code || -1);
+        process.exit(1);
     }
 };
 
