@@ -1,6 +1,6 @@
 {
     "name": "@zyrouge/github-push-action",
-    "version": "1.0.9",
+    "version": "1.0.10",
     "description": "🚀 Easy to use GitHub Push Action!",
     "main": "dist/index.js",
     "scripts": {
