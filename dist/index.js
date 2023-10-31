@@ -31642,15 +31642,21 @@ const action = (options) => __awaiter(void 0, void 0, void 0, function* () {
     const checkBranch = yield git
         .run(["show-branch", `remotes/origin/${options.branch}`])
         .catch((err) => err);
-    if (checkBranch.exitCode === 0) {
+    if (options.checkoutOrphan) {
+        // git checkout --orphan <branch>
+        git.print("checkout --orphan", yield git.run(["checkout", "--orphan", options.branch]));
+        log_1.logger.info("git", `Checked out ${options.branch} (orphan)`);
+    }
+    else if (checkBranch.exitCode === 0) {
         // git checkout <branch>
         git.print("checkout", yield git.run(["checkout", options.branch]));
+        log_1.logger.info("git", `Checked out ${options.branch} (existing)`);
     }
     else {
         // git checkout -b <branch>
         git.print("checkout -b", yield git.run(["checkout", "-b", options.branch]));
+        log_1.logger.info("git", `Checked out ${options.branch} (new)`);
     }
-    log_1.logger.info("git", `Checked out ${options.branch}`);
     try {
         for (var _d = true, _e = __asyncValues((0, readdirp_1.default)(resolvedDirectory, {
             type: "files",
@@ -31871,6 +31877,7 @@ const parseOptions = () => ({
     verbose: (0, core_1.getBooleanInput)("verbose"),
     allowEmptyCommit: (0, core_1.getBooleanInput)("allow-empty-commit"),
     skipFetch: (0, core_1.getBooleanInput)("skip-fetch"),
+    checkoutOrphan: (0, core_1.getBooleanInput)("checkout-orphan"),
 });
 exports.parseOptions = parseOptions;
 const printOptions = (options) => {
