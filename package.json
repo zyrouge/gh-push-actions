@@ -4,8 +4,7 @@
     "description": "🚀 Easy to use GitHub Push Action!",
     "main": "dist/index.js",
     "scripts": {
-        "build": "rimraf dist && tsc",
-        "package": "ncc build ./lib/index.ts --license licenses.txt"
+        "build": "rimraf dist && ncc build ./lib/index.ts --license licenses.txt"
     },
     "repository": {
         "type": "git",
