@@ -14,6 +14,7 @@ export interface IOptions {
     verbose: boolean;
     allowEmptyCommit: boolean;
     skipFetch: boolean;
+    checkoutOrphan: boolean;
 }
 
 export const parseOptions = (): IOptions => ({
@@ -29,6 +30,7 @@ export const parseOptions = (): IOptions => ({
     verbose: getBooleanInput("verbose"),
     allowEmptyCommit: getBooleanInput("allow-empty-commit"),
     skipFetch: getBooleanInput("skip-fetch"),
+    checkoutOrphan: getBooleanInput("checkout-orphan"),
 });
 
 export const printOptions = (options: IOptions) => {

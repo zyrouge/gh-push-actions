@@ -50,6 +50,10 @@ inputs:
         description: Allows skipping git fetch
         required: true
         default: false
+    checkout-orphan:
+        description: Checkouts as an orphan branch
+        required: true
+        default: false
 
 runs:
     using: node20

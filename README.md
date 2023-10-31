@@ -28,6 +28,7 @@
 | `verbose`            | Verbose logging                             | `false`                                        |
 | `allow-empty-commit` | Determines if empty commits are allowed     | `false`                                        |
 | `skip-fetch`         | Allows skipping git fetch                   | `false`                                        |
+| `checkout-orphan`    | Checkouts as an orphan branch               | `false`                                        |
 
 ## Example
 

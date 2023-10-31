@@ -80,17 +80,25 @@ export const action = async (options: IOptions) => {
         .run(["show-branch", `remotes/origin/${options.branch}`])
         .catch((err: IGitRunOutput) => err);
 
-    if (checkBranch.exitCode === 0) {
+    if (options.checkoutOrphan) {
+        // git checkout --orphan <branch>
+        git.print(
+            "checkout --orphan",
+            await git.run(["checkout", "--orphan", options.branch])
+        );
+        logger.info("git", `Checked out ${options.branch} (orphan)`);
+    } else if (checkBranch.exitCode === 0) {
         // git checkout <branch>
         git.print("checkout", await git.run(["checkout", options.branch]));
+        logger.info("git", `Checked out ${options.branch} (existing)`);
     } else {
         // git checkout -b <branch>
         git.print(
             "checkout -b",
             await git.run(["checkout", "-b", options.branch])
         );
+        logger.info("git", `Checked out ${options.branch} (new)`);
     }
-    logger.info("git", `Checked out ${options.branch}`);
 
     for await (const file of readdirp(resolvedDirectory, {
         type: "files",
