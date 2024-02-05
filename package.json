@@ -27,7 +27,7 @@
     "devDependencies": {
         "@types/cross-spawn": "^6.0.4",
         "@types/fs-extra": "^11.0.3",
-        "@types/node": "^20.8.10",
+        "@types/node": "^20.11.16",
         "@vercel/ncc": "^0.38.1",
         "rimraf": "^5.0.5",
         "typescript": "^5.2.2"
